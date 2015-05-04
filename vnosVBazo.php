@@ -6,10 +6,7 @@
 	{
 		$result=array();
 		$result['naslov']=$_POST['naslovDejavnosti'];
-		$result['mentorIme']=array();
-		$result['mentorPriimek']=array();
 		$stringStart=0;
-		
 		$imena=array();
 		$priimki=array();
 
@@ -33,17 +30,26 @@
 		}
 		
 		$size=count($imena);
-		foreach( $i=0 ; $i<$size ; $i++)
+		$result['mentorji']="";
+		for( $i=0 ; $i<$size ; $i++)
 		{
-			$result['mentorji'][]=$imena[$i].' '.$priimki[$i];
+			$result['mentorji'].=$imena[$i].' '.$priimki[$i].', ';
 		}
+		if($size>=1)
+		{
+			$result['mentorji']=substr($result['oblike'],0,-2);
+		}			
 		
 		if(strcmp($_POST['nacinSrecanja'],"poDogovoru")==0)
 			$result['nacinSrecanja']=$_POST['nacinSrecanja'];
 		else
 			$result['nacinSrecanja']=$_POST['nacinSrecanja'].','.$_POST['casSrecanja'];
 		
-		$result['srecanjaDrugo']=$_POST['srecanjaDrugo'];
+		if($_POST['srecanjaDrugo']!="")
+		{
+			$result['nacinSrecanja'].=', drugo: '.$_POST['srecanjaDrugo'];
+		}
+		
 		
 		$result['govorilneUre']=$_POST['govorilneUre'];
 		$result['ePosta']=$_POST['ePosta'];
@@ -61,29 +67,36 @@
 			}
 			else
 			{
-				$result['oblike']=array();
+				$result['oblike']="";
 
 				$found=array_search("pripraveNaTekmovanje",$oblikeTmp);
 				if(gettype($found)!="boolean")
 				{
-					$oblikeTmp[$found].=','.$_POST['pripraveNaTekmovanjeSelect'];
+					$oblikeTmp[$found].='-'.$_POST['pripraveNaTekmovanjeSelect'];
 				}
 				$found=array_search("projektnoDelo",$oblikeTmp);
 				if(gettype($found)!="boolean")
 				{
-					$oblikeTmp[$found].=','.$_POST['projektnoDeloSelect'];
+					$oblikeTmp[$found].='-'.$_POST['projektnoDeloSelect'];
 				}
 			
 				$n=count($oblikeTmp);
 				for($i=0 ; $i<$n ; $i++)
 				{
-					$result['oblike'][]=$oblikeTmp[$i];
+					$result['oblike'].=$oblikeTmp[$i].', ';
 				}
 			}
 		}
 		
-		$result['oblikeDrugo']=$_POST['oblikeDrugo'];
-		
+		if($_POST['oblikeDrugo']!="")
+		{
+			$result['oblike'].='drugo: '.$_POST['oblikeDrugo'];
+		}
+		else
+		{
+			$result['oblike']=substr($result['oblike'],0,-2);
+		}
+	
 		$result['primernost']="";
 		$primernostTmp;
 		if(isset($_POST['primernost']))
@@ -168,7 +181,10 @@
 			$result['primernost']="/";
 		}
 		
-		$result['primernostDrugo']=$_POST['primernostDrugo'];
+		if($_POST['primernostDrugo']!="")
+		{
+			$result['primernost'].=", drugo: ".$_POST['primernostDrugo'];
+		}
 		
 		if(isset($_POST['razvoj']))
 		{
@@ -179,14 +195,16 @@
 			}
 			else
 			{
-				$result['razvoj']=array();
+				$result['razvoj']="";
 				
 				$n=count($razvojTmp);
 				for($i=0 ; $i<$n ; $i++)
 				{
-					$result['razvoj'][]=$razvojTmp[$i];
+					$result['razvoj'].=$razvojTmp[$i].', ';
 				}
 			}
+			
+			$result['razvoj']=substr($result['razvoj'],0,-2);
 		}
 		
 		if(isset($_POST['pomembneOpombe']))
@@ -201,7 +219,6 @@
 	
 	function zapisi($table)
 	{
-		// TUKI ZAPISES V BAZO @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
 		$returnString="";
 
 	/*	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
@@ -212,7 +229,9 @@
 		else
 		{
 			$sql = "INSERT INTO dejavnost (naslovD, MentorjiD, steviloSrecanjD, govUreD, mailD, telefonD, DrugoD, OrgOblikaD, PrimernostD, NadarjenostD, OpombeD)
-			VALUES ('yolo')";
+			VALUES ('$data['naslov']', '$data['mentorji']', '$data['nacinSrecanja']', '$data['govorilneUre']',
+			'$data['ePosta']', '$data['telefon']', '$data['vpisDrugo']', '$data['oblike']',
+			'$data['primernost']', '$data['razvoj']', '$data['pomembneOpombe']')";
 
 			if (mysqli_query($conn, $sql)) {
 				$returnString = "Dogodek uspešno dodan!";
