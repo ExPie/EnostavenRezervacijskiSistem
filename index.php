@@ -41,6 +41,9 @@ li
 </ul>
 <ul>
 	<div>
+		<li onclick="openUporabniki();" id="uporabniki" >  
+			UPORABNIKI 
+		</li>
 		<li onclick="openVnos();" id="vnos" >  
 			VNOS 
 		</li>
@@ -65,7 +68,7 @@ li
 
 <script type="text/javascript">
 	var loggedIn=-1;
-	checkLogin('test',1);
+	checkLogin('test',3);
 	
 	function checkLogin(ime, status)
 	{					
@@ -79,7 +82,15 @@ li
 			{
 				document.getElementById('frame').src='vnos.html';
 			}
-			document.getElementById('prijava').innerHTML="Prijavljen/-a kot "+ime;
+			var state="";
+			switch(status)
+			{
+				case 0: state="dijak"; break;
+				case 1: state="učitelj"; break;
+				case 2: state="mentor"; break;
+				case 3: state="admin"; break;
+			}
+			document.getElementById('prijava').innerHTML="Prijavljen/-a kot "+ime+' ('+ state + ')';
 			document.getElementById('registracija').innerHTML="ODJAVA";
 			loggedIn=status;
 		}
@@ -112,6 +123,18 @@ li
 			{
 				odjava();
 			}
+		}
+	}
+	
+	function openUporabniki()
+	{
+		if(loggedIn<2)
+		{
+			alert("Za pogled uporabnikov moraš biti mentor ali administrator!");
+		}
+		else
+		{
+			document.getElementById('frame').src='status.php';
 		}
 	}
 	

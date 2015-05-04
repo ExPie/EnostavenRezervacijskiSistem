@@ -1,8 +1,5 @@
 <?php
-	/*session_start();
-	if ($_SESSION["stutus"] < 2)
-		header("location: index.php");
-*/
+	session_start();
 
 	$returnString = "";
 
