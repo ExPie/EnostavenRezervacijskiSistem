@@ -217,21 +217,33 @@
 	echo '<br><br><br>';
 	$data=parse();
 	
-	function zapisi($table)
+	function zapisi($data)
 	{
 		$returnString="";
 
-	/*	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
+		$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
 
 		if (!$conn) {
 			$returnString="Connection failed: " . mysqli_connect_error();
 		}
 		else
 		{
+
+			$na = $data['naslov'];
+			$me = $data['mentorji'];
+			$naS = $data['nacinSrecanja'];
+			$go = $data['govorilneUre'];
+			$eP = $data['ePosta'];
+			$te = $data['telefon'];
+			$vp = $data['vpisDrugo'];
+			$ob = $data['oblike'];
+			$pr = $data['primernost'];
+			$ra = $data['razvoj'];
+			$po = $data['pomembneOpombe'];
+
+
 			$sql = "INSERT INTO dejavnost (naslovD, MentorjiD, steviloSrecanjD, govUreD, mailD, telefonD, DrugoD, OrgOblikaD, PrimernostD, NadarjenostD, OpombeD)
-			VALUES ('$data['naslov']', '$data['mentorji']', '$data['nacinSrecanja']', '$data['govorilneUre']',
-			'$data['ePosta']', '$data['telefon']', '$data['vpisDrugo']', '$data['oblike']',
-			'$data['primernost']', '$data['razvoj']', '$data['pomembneOpombe']')";
+			VALUES ('$na', '$me', '$naS', '$go', '$eP', '$te', '$vp', '$ob', '$pr', '$ra', '$po')";
 
 			if (mysqli_query($conn, $sql)) {
 				$returnString = "Dogodek uspešno dodan!";
@@ -240,7 +252,7 @@
 			}
 
 			mysqli_close($conn);
-		}*/
+		}
 	
 		return $returnString;
 	}
