@@ -203,19 +203,15 @@
 	{
 		// TUKI ZAPISES V BAZO @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
 		$returnString="";
-		$servername = "localhost";
-		$username = "username";
-		$password = "password";
-		$dbname = "myDB";
 
-	/*	$conn = mysqli_connect($servername, $username, $password, $dbname);
+	/*	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
 
 		if (!$conn) {
 			$returnString="Connection failed: " . mysqli_connect_error();
 		}
 		else
 		{
-			$sql = "INSERT INTO Tabela (atr1)
+			$sql = "INSERT INTO dejavnost (naslovD, MentorjiD, steviloSrecanjD, govUreD, mailD, telefonD, DrugoD, OrgOblikaD, PrimernostD, NadarjenostD, OpombeD)
 			VALUES ('yolo')";
 
 			if (mysqli_query($conn, $sql)) {
