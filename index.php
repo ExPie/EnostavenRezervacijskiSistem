@@ -1,4 +1,4 @@
-<?php
+﻿<?php
    session_start();
 ?>
 <!DOCTYPE html>
@@ -6,7 +6,6 @@
 
 <head> 
 <style>
-
 ul 
 {
     list-style-type: none;
@@ -16,25 +15,20 @@ ul
 	float: right;
 	color: #000000;
 }
-
 li:hover
 {
-	background-color: #00ffff;
+	background-color: #ffff00;
 }
-
 iframe:hover
 {
 	transition-duration: 10s;
 }
-
 li 
 {
     float: left;
 	padding: 10px;
-	background-color: #ffff00;
+	background-color: #ffffd0;
 }
-
-
 </style>
 
 <h2>
@@ -62,17 +56,16 @@ li
 
 </head>
 
-<body style="background-color:#ff00ff;" >
+<body style="background-color:#d0e0ff;" >
 <div>
 
-<iframe src="prijava.php" style="background-color:#00ff00; width:100%; height:1500px;"  seamless id="frame"> </iframe>
+<iframe src="prijava.php" style="background-color:#e0f0ff; width:100%; height:1500px;"  seamless id="frame"> </iframe>
 
 </div>
 
 <script type="text/javascript">
-
 	var loggedIn=-1;
-	checkLogin('test',0);
+	checkLogin('test',1);
 	
 	function checkLogin(ime, status)
 	{					
@@ -148,7 +141,6 @@ li
 		{
 			document.getElementById('frame').src='pogled.php';
 		}
-
 	}
 	
 	function openPrijava()
@@ -158,7 +150,6 @@ li
 			document.getElementById('frame').src='prijava.php';
 		} 
 	}
-
 </script>
 
 </body>
