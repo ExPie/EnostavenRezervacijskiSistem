@@ -1,6 +1,10 @@
 <?php
 	session_start();
 
+	print_r($_SESSION);
+
+	echo "<br/><br/><br/><br/><br/>";
+
 	$returnString = "";
 
 	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
@@ -11,10 +15,10 @@
 		else {
 			$sql = "SELECT userID, username, userPriimek, userIme, userStatus
 					FROM user;";
-			/*if($_SESSION["stutus"] != 3)
+			if($_SESSION["stutus"] != 3)
 				$sql = "SELECT username, userPriimek, userIme, userStatus
 					FROM user WHERE userStatus < 2;";
-*/
+
 			$result = $conn -> query($sql);
 			$result = $result -> fetch_all(MYSQLI_ASSOC);
 		}
@@ -42,10 +46,10 @@
      		<option value="0">Dijak</option>
      		<option value="1">Ucitelj</option>';
 
-    /*if($_SESSION["stutus"] = 3)
+    if($_SESSION["stutus"] = 3)
 				echo '<option value="2">Mentor</option>
      				<option value="3">Admin</option>';
-*/ 		
+ 		
      
 
      echo '
