@@ -7,15 +7,18 @@
  	}
 	else
 	{
-    		$sql = "SELECT userID, username, userPriimek, userIme, userStatus
-     		FROM user;";
+    		$sql = "SELECT *
+     		FROM dejavnost;";
 		$result = $conn -> query($sql);
   		$result = $result -> fetch_all(MYSQLI_ASSOC);
  	}
 	//print_r($result);
+	
+	echo'<h1>Dejavnosti:<h1><br>';
 	echo'<table>';
 	foreach($result as $el)
 	{
+		echo'<tr><td>'.$el["naslovD"].'</td></td>';
 	}
 	echo'</table>';
 ?>
