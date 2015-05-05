@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Gostitelj: 127.0.0.1
--- Čas nastanka: 05. maj 2015 ob 10.12
+-- Čas nastanka: 05. maj 2015 ob 10.33
 -- Različica strežnika: 5.6.21
 -- Različica PHP: 5.6.3
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `userGeslo` varchar(50) NOT NULL,
   `userStatus` int(11) NOT NULL,
   `userMail` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Odloži podatke za tabelo `user`
@@ -71,7 +71,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`userID`, `username`, `userIme`, `userPriimek`, `userGeslo`, `userStatus`, `userMail`) VALUES
 (1, 'volko', 'Jan', 'Novak', '7288edd0fc3ffcbe93a0cf06e3568e28521687bc', 2, 'volko@test.com'),
 (2, 'admin', 'Adko', 'Adolko', 'f865b53623b121fd34ee5426c792e5c33af8c227', 3, 'admin@admin.net'),
-(3, 'vrto92', 'Matic', 'Vrtacnik', '195c264b25c99e83c8375a6e90b4e685b372d87d', 1, 'test@test.com');
+(3, 'vrto92', 'Matic', 'Vrtacnik', '195c264b25c99e83c8375a6e90b4e685b372d87d', 1, 'test@test.com'),
+(4, 'pivkst', 'Jan', 'Pivk', 'e0083045cc04a3966a26fa394e91950992420532', 0, 'sudo@sudo.com');
 
 --
 -- Indeksi zavrženih tabel
@@ -102,7 +103,7 @@ MODIFY `dejavnostID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT tabele `user`
 --
 ALTER TABLE `user`
-MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
