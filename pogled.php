@@ -1,6 +1,21 @@
 <?php
-	
-	for ($i=0;$i<10;$i++)
-		echo '<h1><b><center> PIVK STUFF HERE </center></b></h1>';
+	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
 
+  	if (!$conn)
+	{
+   		$returnString="Connection failed: " . mysqli_connect_error();
+ 	}
+	else
+	{
+    		$sql = "SELECT userID, username, userPriimek, userIme, userStatus
+     		FROM user;";
+		$result = $conn -> query($sql);
+  		$result = $result -> fetch_all(MYSQLI_ASSOC);
+ 	}
+	//print_r($result);
+	echo'<table>';
+	foreach($result as $el)
+	{
+	}
+	echo'</table>';
 ?>
