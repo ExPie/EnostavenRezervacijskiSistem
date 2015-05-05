@@ -11,13 +11,15 @@
 
 		if (!$conn) {
 			$returnString="Connection failed: " . mysqli_connect_error();
-		}
-		else {
-			$sql = "SELECT userID, username, userPriimek, userIme, userStatus
+		} else {
+			if($_SESSION["status"] == 3) {
+				$sql = "SELECT userID, username, userPriimek, userIme, userStatus
 					FROM user;";
-			if($_SESSION["stutus"] != 3)
+			}
+			else {
 				$sql = "SELECT username, userPriimek, userIme, userStatus
 					FROM user WHERE userStatus < 2;";
+			}
 
 			$result = $conn -> query($sql);
 			$result = $result -> fetch_all(MYSQLI_ASSOC);
@@ -28,7 +30,7 @@
 	echo '<br/> <br/> <br/> <br/> <br/> <br/>';
 
 	echo '<form action="vnosStatusa.php" method="POST" id="vnos2">';
-	echo 'Uporabnik : 
+	echo 'Uporabnik: 
   		  <select id="uporabniki" name="uporabniki" >
      		<option value="-1">Izberi uporabnika</option>';
      		
@@ -40,15 +42,16 @@
   	<br/>
 
 
-  	Uporabnik : 
+  	Nov status:  
   		<select id="status" name="status" >
      		<option value="-1">Izberi status</option>
      		<option value="0">Dijak</option>
      		<option value="1">Ucitelj</option>';
 
-    if($_SESSION["stutus"] = 3)
-				echo '<option value="2">Mentor</option>
-     				<option value="3">Admin</option>';
+    if($_SESSION['status'] == 3) {
+		echo '<option value="2">Mentor</option>
+     			<option value="3">Admin</option>';
+     }
  		
      
 
