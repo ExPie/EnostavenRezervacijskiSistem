@@ -1,9 +1,6 @@
 <?php
 	session_start();
 
-	print_r($_SESSION);
-
-	echo "<br/><br/><br/><br/><br/>";
 
 	$returnString = "";
 
@@ -25,9 +22,7 @@
 			$result = $result -> fetch_all(MYSQLI_ASSOC);
 		}
 
-	print_r($result);
-
-	echo '<br/> <br/> <br/> <br/> <br/> <br/>';
+	echo '<h1>SPREMEMBA STATUSA</h1>';
 
 	echo '<form action="vnosStatusa.php" method="POST" id="vnos2">';
 	echo 'Uporabnik: 
@@ -35,7 +30,24 @@
      		<option value="-1">Izberi uporabnika</option>';
      		
   	foreach ($result as $key => $value) {
-		echo '<option value='.$value['userID'].'>'.$value['username'].' - '.$value['userIme'].' '.$value['userPriimek'].'</option>';
+		echo '<option value='.$value['userID'].'>'.$value['username'].' - '.$value['userIme'].' '.$value['userPriimek']. ' ('; 
+		switch($value['userStatus']) {
+			case 0:
+				echo 'dijak';
+				break;
+			case 1:
+				echo 'ucitelj';
+				break;
+			case 2:
+				echo 'mentor';
+				break;
+			case 3:
+				echo 'admin';
+				break;
+			default:
+				echo 'UsER UnkN0wN!!1one';
+		}
+		echo ')</option>';
 	}
 
   	echo '</select>
