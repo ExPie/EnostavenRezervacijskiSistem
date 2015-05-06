@@ -1,24 +1,46 @@
 <?php
+	//print_r($result);
+	echo'
+	<form method="POST" action="pogled.php">
+	<input type="text" name="search">
+	<input type="submit" value="Iskanje">
+	</form>';
 	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
-
-  	if (!$conn)
+	if(count($_POST)==0)
 	{
-   		$returnString="Connection failed: " . mysqli_connect_error();
- 	}
+		$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
+
+	  	if (!$conn)
+		{
+   			$returnString="Connection failed: " . mysqli_connect_error();
+ 		}
+		else
+		{
+    			$sql = "SELECT *
+     			FROM dejavnost;";
+			$result = $conn -> query($sql);
+  			$result = $result -> fetch_all(MYSQLI_ASSOC);
+ 		}
+		echo'<h1>Dejavnosti:<h1><br>';
+		echo'<table>';
+		foreach($result as $el)
+		{
+			echo'<tr><td>'.$el["naslovD"].'</td></td>';
+		}
+		echo'</table>';
+	}
 	else
 	{
-    		$sql = "SELECT *
-     		FROM dejavnost;";
-		$result = $conn -> query($sql);
-  		$result = $result -> fetch_all(MYSQLI_ASSOC);
- 	}
-	//print_r($result);
-	
-	echo'<h1>Dejavnosti:<h1><br>';
-	echo'<table>';
-	foreach($result as $el)
-	{
-		echo'<tr><td>'.$el["naslovD"].'</td></td>';
+	  	if (!$conn)
+		{
+   			$returnString="Connection failed: " . mysqli_connect_error();
+ 		}
+		else
+		{
+    			$sql = "SELECT *
+     			FROM dejavnost WHERE naslovD LIKE %kol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   %;";
+			$result = $conn -> query($sql);
+  			$result = $result -> fetch_all(MYSQLI_ASSOC);
+ 		}
 	}
-	echo'</table>';
 ?>
