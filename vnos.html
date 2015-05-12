@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head> 
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
 <title> Dejavnost </title>
 <h1><b> VNESI DEJAVNOST </b></h1> 
 
@@ -144,7 +144,7 @@ fieldset
 	var priimekForm="";
 	var counter=1;
 
-	function dodajMentorja()
+	function dodajMentorja()//funkcija, ki doda mentorja na seznam 
 	{
 		var ime = document.getElementsByName("mentorIme")[0].value;
 		var priimek = document.getElementsByName("mentorPriimek")[0].value;
@@ -158,7 +158,7 @@ fieldset
 			window.alert("Prazen vnos priimka!");
 			return;
 		}
-		
+		//DODAJANJE NA SEZNAM
 		output += '<i>'+counter+'. '+ime+' '+priimek+'</i><br>';
 		imeForm += ime+',';
 		priimekForm += priimek+',';
@@ -168,7 +168,7 @@ fieldset
 		document.getElementsByName("mentorPriimek")[0].value='';
 	}
 	
-	function odstraniMentorja ()
+	function odstraniMentorja ()// ODSTANITEV VSEH MENTORJEV S SEZNAMA
 	{
 		document.getElementById("mentorji").innerHTML = "";
 		imeForm="";
@@ -179,7 +179,7 @@ fieldset
 		document.getElementsByName("mentorPriimek")[0].value='';
 	}
 	
-	function disableSelect()
+	function disableSelect()// FUNKCIJA, KI ONEMOGOČI VSE DROPDOWNE, ČE NISO RELEVANTNI
 	{
 		if(document.getElementsByName('nacinSrecanja')[0].checked)
 		{
@@ -253,7 +253,7 @@ fieldset
 		
 	}
 	
-	function dodajVFormo()
+	function dodajVFormo()// IZVEDE SE OB KLIKU NA SUBMIT IN VSE MENTORJE IZPIŠE V STRING
 	{
 		document.getElementsByName("mentorIme")[0].value=imeForm;
 		document.getElementsByName("mentorPriimek")[0].value=priimekForm;
