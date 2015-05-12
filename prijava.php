@@ -10,7 +10,7 @@ if (session_status() == PHP_SESSION_NONE)
 $user=$geslo=$status="";
 $result="";
 
-if($_SERVER["REQUEST_METHOD"]=="POST")
+if($_SERVER["REQUEST_METHOD"]=="POST")// PREVERJANJE, ČE JE UPORABNIK V BAZI PO PRITISKU TIPKE SUBMIT
 {
 	$postUser=$_POST["username"];
 	$postGeslo=sha1($_POST["geslo"]);
@@ -55,7 +55,7 @@ else
 
 	echo '<center><h1><b>'.$result.'</center> </h1> </b>';
 	
-	if(isset($user) && $user!="" && $status!="")
+	if(isset($user) && $user!="" && $status!="")// ČE SO VSE INFORMACIJE VREDU SE ZAŽENE FUNKCIJA ZA LOGIN
 	{
 		echo '<script type="text/javascript">
 		parent.checkLogin('.json_encode($user).','.json_encode($status).');
