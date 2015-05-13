@@ -3,7 +3,7 @@
 $outputString="";
 $ime=$priimek=$geslo=$email=$username="";
 
-if(isset($_POST["username"]))
+if(isset($_POST["username"])) // Preverjanje podatkov
 {
 	$username=$_POST["username"];
 }
@@ -48,25 +48,25 @@ else
 	$outputString="Email ni bil vnešen :error 4398873074658655";
 }
 
-if($outputString=="")
+if($outputString=="") // Če so vsi podatki pravilni
 {
 	
 	$geslo=sha1($geslo);
-	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
+	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti'); // Povezava z bazo
 
 	if (!$conn) {
 		$outputString="Connection failed: " . mysqli_connect_error();
 	}
 	
-	else {
+	else { // Če je vse v redu
 
 		$sql = "INSERT INTO user(username, userIme, userPriimek, userGeslo, userStatus, userMail)
 		VALUES ('$username', '$ime', '$priimek', '$geslo', '0', '$email')";
 
 		if (mysqli_query($conn, $sql)) {
-			$outputString = "Dogodek uspešno dodan!";
+			$outputString = "Dogodek uspešno dodan!"; // SQL se izvede
 		} else {
-			$outputString = "Error: " . $sql . "<br>" . mysqli_error($conn);
+			$outputString = "Error: " . $sql . "<br>" . mysqli_error($conn); // Če se ne izvede
 		}
 
 		mysqli_close($conn);
