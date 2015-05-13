@@ -4,16 +4,16 @@
 
 	$returnString = "";
 
-	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
+	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti'); // Povezava z bazo
 
 		if (!$conn) {
-			$returnString="Connection failed: " . mysqli_connect_error();
+			$returnString="Connection failed: " . mysqli_connect_error(); // Če ne uspe
 		} else {
-			if($_SESSION["status"] == 3) {
+			if($_SESSION["status"] == 3) { // Querry, če je uporabnik admin
 				$sql = "SELECT userID, username, userPriimek, userIme, userStatus
 					FROM user;";
 			}
-			else {
+			else { // Če ni admin
 				$sql = "SELECT username, userPriimek, userIme, userStatus
 					FROM user WHERE userStatus < 2;";
 			}
@@ -29,7 +29,7 @@
   		  <select id="uporabniki" name="uporabniki" >
      		<option value="-1">Izberi uporabnika</option>';
      		
-  	foreach ($result as $key => $value) {
+  	foreach ($result as $key => $value) { // V prvi combobox vnesemo vse uporabnike, ki jim trenutni prijavljeni uporabnik lahko spreminja status
 		echo '<option value='.$value['userID'].'>'.$value['username'].' - '.$value['userIme'].' '.$value['userPriimek']. ' ('; 
 		switch($value['userStatus']) {
 			case 0:
@@ -60,7 +60,7 @@
      		<option value="0">Dijak</option>
      		<option value="1">Ucitelj</option>';
 
-    if($_SESSION['status'] == 3) {
+    if($_SESSION['status'] == 3) { // Če je uprabnik admin, ima na volje šr ta 2 statusa
 		echo '<option value="2">Mentor</option>
      			<option value="3">Admin</option>';
      }
@@ -77,5 +77,5 @@
 
 	echo '</form>';
 
-	mysqli_close($conn);
+	mysqli_close($conn); // Zapre povezavo
 ?>
