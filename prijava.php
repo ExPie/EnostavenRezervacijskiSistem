@@ -15,20 +15,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST")// PREVERJANJE, ČE JE UPORABNIK V BAZI PO
 	$postUser=$_POST["username"];
 	$postGeslo=sha1($_POST["geslo"]);
 
-	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
+	$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti'); // Povezava z bazo
 
 	if (!$conn) {
-		$outputString="Connection failed: " . mysqli_connect_error();
+		$outputString="Connection failed: " . mysqli_connect_error(); // Če se ne povezemo
 	}
 	
 	else {
 		$result = $conn -> query("SELECT userGeslo, userStatus FROM user WHERE username = '$postUser'");
-		$result = $result -> fetch_all(MYSQLI_ASSOC);
+		$result = $result -> fetch_all(MYSQLI_ASSOC); // Izvedba queryja
 		$geslo=$result[0]['userGeslo'];
 		$status=$result[0]['userStatus'];
 	}
 	
-	if($postGeslo!=$geslo)
+	if($postGeslo!=$geslo) // Preverjanje, če se gesli ujemata
 	{
 		$result="NAPAČNO UPORABNIŠKO IME/GESLO";
 	}
@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")// PREVERJANJE, ČE JE UPORABNIK V BAZI PO
 	}
 }
 	
-if($user!="")
+if($user!="")  // Dodajanje spremenjiv v session
 {
 	$_SESSION["username"]=$user;
 	$_SESSION["status"]=$status;
