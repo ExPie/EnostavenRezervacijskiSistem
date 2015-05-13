@@ -2,7 +2,7 @@
 	echo '<head> <meta charset="UTF-8"> </head>';
 	print_r($_POST);
 
-	function parse()
+	function parse() // podatki se sparsajo
 	{
 		$result=array();
 		$result['naslov']=$_POST['naslovDejavnosti'];
@@ -215,20 +215,20 @@
 		return $result;
 	}
 	echo '<br><br><br>';
-	$data=parse();
+	$data=parse(); // V tej spremenjivki so sparsani podatki
 	
-	function zapisi($data)
+	function zapisi($data) // Zapise v bazo
 	{
 		$returnString="";
 
-		$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti');
+		$conn = mysqli_connect('localhost', 'root', '', 'dejavnosti'); // Povezava z bazo
 
 		if (!$conn) {
-			$returnString="Connection failed: " . mysqli_connect_error();
+			$returnString="Connection failed: " . mysqli_connect_error(); // če ne uspe
 		}
 		else
 		{
-
+			// Noben ne zna uporabljat trojnih narekovajov
 			$na = $data['naslov'];
 			$me = $data['mentorji'];
 			$naS = $data['nacinSrecanja'];
@@ -241,17 +241,17 @@
 			$ra = $data['razvoj'];
 			$po = $data['pomembneOpombe'];
 
-
+			// SQL querry
 			$sql = "INSERT INTO dejavnost (naslovD, MentorjiD, steviloSrecanjD, govUreD, mailD, telefonD, DrugoD, OrgOblikaD, PrimernostD, NadarjenostD, OpombeD)
 			VALUES ('$na', '$me', '$naS', '$go', '$eP', '$te', '$vp', '$ob', '$pr', '$ra', '$po')";
 
 			if (mysqli_query($conn, $sql)) {
-				$returnString = "Dogodek uspešno dodan!";
+				$returnString = "Dogodek uspešno dodan!"; // Če se izvede pravlino
 			} else {
-				$returnString = "Error: " . $sql . "<br>" . mysqli_error($conn);
+				$returnString = "Error: " . $sql . "<br>" . mysqli_error($conn); // Če se ne
 			}
 
-			mysqli_close($conn);
+			mysqli_close($conn); // Zapre povezavo
 		}
 	
 		return $returnString;
